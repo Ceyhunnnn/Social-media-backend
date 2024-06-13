@@ -33,7 +33,12 @@ const login = async (req, res) => {
   createToken(loginUser, res);
 };
 
+const userInformations = async (req, res) => {
+  return new Response(req.user, "success").success(res);
+};
+
 module.exports = {
   login,
   register,
+  userInformations,
 };
