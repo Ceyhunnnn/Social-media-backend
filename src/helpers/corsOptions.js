@@ -1,4 +1,7 @@
-const whiteList = ["http://localhost:3000"];
+const whiteList = [
+  "http://localhost:3000",
+  "https://main--nextjs-social.netlify.app",
+];
 
 const corsOptions = (req, callback) => {
   let corsOptions = { origin: false };
