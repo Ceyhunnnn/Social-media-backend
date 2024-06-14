@@ -37,8 +37,21 @@ const userInformations = async (req, res) => {
   return new Response(req.user, "success").success(res);
 };
 
+const userProfileUpdate = async (req, res) => {
+  const { id } = req.params;
+  const updatedUser = await user.findByIdAndUpdate(id, req.body, {
+    new: false,
+  });
+  if (updatedUser) {
+    new Response(null, "profile updated!").created(res);
+  } else {
+    throw new APIError("profile didn't updated, please try again.", 400);
+  }
+};
+
 module.exports = {
   login,
   register,
   userInformations,
+  userProfileUpdate,
 };
