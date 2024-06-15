@@ -18,8 +18,15 @@ const getUserPosts = async (req, res) => {
     new Response(null, "").success(res);
   }
 };
+const getTopPosts = async (req, res) => {
+  const topPosts = await posts.find().sort({ createdAt: -1 }).limit(5);
+  if (topPosts) {
+    new Response(topPosts, "").success(res);
+  }
+};
 
 module.exports = {
   createUserPost,
   getUserPosts,
+  getTopPosts,
 };
