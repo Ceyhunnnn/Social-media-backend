@@ -26,7 +26,7 @@ const getTopPosts = async (req, res) => {
 };
 const deleteUserPost = async (req, res) => {
   const { id } = req.params;
-  const deletedData = await posts.findByIdAndDelete({ id });
+  const deletedData = await posts.findByIdAndDelete(id);
   if (deletedData) {
     new Response(null, "Delete is successfull").success(res);
   }

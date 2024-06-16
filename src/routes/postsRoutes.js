@@ -10,6 +10,6 @@ const {
 router.post("/createUserPost", createUserPost);
 router.get("/getUsersPosts/:id", getUserPosts);
 router.get("/getTopPosts", getTopPosts);
-router.get("/deleteUserPost/:id", deleteUserPost);
+router.delete("/deleteUserPost/:id", deleteUserPost);
 
 module.exports = router;
