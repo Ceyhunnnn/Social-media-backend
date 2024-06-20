@@ -1,7 +1,6 @@
 const posts = require("../models/postModel");
 const APIError = require("../utils/error");
 const Response = require("../utils/response");
-
 const createUserPost = (req, res) => {
   const newPost = new posts(req.body);
   newPost
@@ -19,10 +18,14 @@ const getUserPosts = async (req, res) => {
   }
 };
 const getTopPosts = async (req, res) => {
-  const topPosts = await posts.find().sort({ createdAt: -1 }).limit(5);
+  const topPosts = await posts.find().sort({ createdAt: -1 }).limit(10);
   if (topPosts) {
     new Response(topPosts, "").success(res);
   }
+};
+const getTopPostsSocket = async () => {
+  const topPosts = await posts.find().sort({ createdAt: -1 }).limit(10);
+  return topPosts;
 };
 const deleteUserPost = async (req, res) => {
   const { id } = req.params;
@@ -37,4 +40,5 @@ module.exports = {
   getUserPosts,
   getTopPosts,
   deleteUserPost,
+  getTopPostsSocket,
 };
