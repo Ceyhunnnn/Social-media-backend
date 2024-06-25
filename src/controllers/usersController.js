@@ -4,7 +4,10 @@ const Response = require("../utils/response");
 
 const getAllUsers = async (req, res) => {
   try {
-    const allUsers = await user.find({}).select("_id firstName lastName title");
+    const allUsers = await user
+      .find({})
+      .select("_id firstName lastName title")
+      .limit(4);
     if (allUsers.length > 0) {
       new Response(allUsers, "Success").success(res);
     }
