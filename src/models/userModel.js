@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+    image: {
+      type: String,
+      required: false,
+    },
   },
   {
     collection: "users",
