@@ -18,13 +18,21 @@ const getUserPosts = async (req, res) => {
   }
 };
 const getTopPosts = async (req, res) => {
-  const topPosts = await posts.find().sort({ createdAt: -1 }).limit(10);
+  const topPosts = await posts
+    .find()
+    .populate("user", "firstName lastName title")
+    .sort({ createdAt: -1 })
+    .limit(10);
   if (topPosts) {
     new Response(topPosts, "").success(res);
   }
 };
 const getTopPostsSocket = async () => {
-  const topPosts = await posts.find().sort({ createdAt: -1 }).limit(10);
+  const topPosts = await posts
+    .find()
+    .populate("user", "firstName lastName title")
+    .sort({ createdAt: -1 })
+    .limit(10);
   return topPosts;
 };
 const deleteUserPost = async (req, res) => {

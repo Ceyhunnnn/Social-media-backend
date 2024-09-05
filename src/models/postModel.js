@@ -2,24 +2,14 @@ const mongoose = require("mongoose");
 const objectId = mongoose.Schema.Types.ObjectId;
 const postSchema = new mongoose.Schema(
   {
-    userId: { type: objectId, ref: "users" },
-    firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    title: {
-      type: String,
-      trim: true,
-    },
+    user: { type: objectId, ref: "users" },
     content: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String,
+      required: false,
     },
   },
 

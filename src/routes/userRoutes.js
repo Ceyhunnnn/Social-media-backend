@@ -1,7 +1,8 @@
 const router = require("express").Router();
 
-const { getAllUsers } = require("../controllers/usersController");
+const { getSuggesstedFriends } = require("../controllers/usersController");
+const { getUserDataWithToken } = require("../middlewares/auth");
 
-router.get("/getAllUsers", getAllUsers);
+router.get("/getSuggesstedFriends", getUserDataWithToken, getSuggesstedFriends);
 
 module.exports = router;
