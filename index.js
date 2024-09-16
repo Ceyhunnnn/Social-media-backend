@@ -1,6 +1,6 @@
 require("express-async-errors");
 require("dotenv").config();
-require("./src/database/databaseConnection");
+require("./src/config/databaseConnection");
 const express = require("express");
 const app = express();
 const router = require("./src/routes");
@@ -10,7 +10,9 @@ const errorHandlerMiddleware = require("./src/middlewares/errorMiddleware");
 const { Server } = require("socket.io");
 const http = require("http");
 const { setupEvents } = require("./src/utils/socket");
-
+const swaggerJsDocs = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const { swaggerOptions } = require("./src/config/swaggerOptions");
 const server = http.createServer(app);
 const socket = new Server(server, {
   cors: {
@@ -26,9 +28,16 @@ app.use(
 );
 app.use(cors(corsOptions));
 app.use("/api", router);
+app.get("/", (req, res) => {
+  res.send("Api is running...");
+});
 app.use(errorHandlerMiddleware);
 
 setupEvents(socket);
+
+const swaggerDocs = swaggerJsDocs(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 server.listen(process.env.PORT || 3001, () => {
   console.log(`Server is running in port ${process.env.PORT}`);
 });
