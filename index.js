@@ -13,6 +13,7 @@ const { setupEvents } = require("./src/utils/socket");
 const swaggerJsDocs = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const { swaggerOptions } = require("./src/config/swaggerOptions");
+const { log } = require("./src/middlewares/log");
 const server = http.createServer(app);
 const socket = new Server(server, {
   cors: {
@@ -27,7 +28,8 @@ app.use(
   express.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 })
 );
 app.use(cors(corsOptions));
-app.use("/api", router);
+app.use("/api", log, router);
+//use for log
 app.get("/", (req, res) => {
   res.send("Api is running...");
 });
