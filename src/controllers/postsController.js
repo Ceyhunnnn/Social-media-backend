@@ -13,7 +13,7 @@ const createUserPost = (req, res) => {
 };
 const getUserPosts = async (req, res) => {
   const { id } = req.params;
-  const userPosts = await posts.find({ userId: id }).sort({ createdAt: -1 });
+  const userPosts = await posts.find({ user: id }).sort({ createdAt: -1 });
   if (userPosts) {
     new Response(userPosts, "").success(res);
   } else {
